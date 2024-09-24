@@ -5,7 +5,8 @@ using UnityEngine;
 public class CheckPoint : MonoBehaviour
 {
     public bool Activate = false;
-    public static ChackPoint activeCheckpoint;
+    public static CheckPoint activeCheckpoint;
+
 
     private void OntriggerEnter2D(Collider2D other)
     {
@@ -15,8 +16,8 @@ public class CheckPoint : MonoBehaviour
 
             activeCheckpoint = this;
 
-            PlayerPrefbs.setFloat("PlayerPosX".other.transform.position.x);
-            PlayerPrefbs.setFloat("PlayerPosY".other.transform.position.y);
+            PlayerPrefs.SetFloat("PlayerPosX",other.transform.position.x);
+            PlayerPrefs.SetFloat("PlayerPosY",other.transform.position.y);
 
             PlayerPrefs.Save();
         }

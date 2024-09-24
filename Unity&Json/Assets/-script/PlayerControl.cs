@@ -57,7 +57,8 @@ public class PlayerControl : MonoBehaviour
             enElSuelo=false;
         }      
     }
-    public void OnCollisionEnter2d(Collider2D collision)
+
+    private void OnCollisionEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Suelo"))
         {
@@ -65,25 +66,33 @@ public class PlayerControl : MonoBehaviour
             Debug.Log("Estoy tocando el suelo");
         }
     }
+
     private void OnTriggerEnter2D(Collider2D collision)
     { 
         
         if (collision.CompareTag("Enemy"))
         {
             Debug.Log("Soy el enemigo");
+            //gameObject.SetActive(false);
+            PlayerDeath();
         }
 
     }
+
     public void PlayerDeath()
     {
-
+        RespawnCheckpoint();
     }
 
     public void RespawnCheckpoint()
     {
-        if (Checkpoint.activeChechpoint)
+        if (CheckPoint.activeCheckpoint != null)
         {
-
+            float PlayerPosX = PlayerPrefs.GetFloat("PlayerPosX");
+            float PlayerPosY = PlayerPrefs.GetFloat("PlayerPosY");
+            
+            Vector3 respawnPosition = new Vector3(PlayerPosX, PlayerPosY, jugadorTransform.position.z);
+            jugadorTransform.position = respawnPosition;
         }
     }
 }
